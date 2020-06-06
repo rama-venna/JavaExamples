@@ -20,26 +20,34 @@ public class GenericsDemo1 {
         numberList.add(1); //Integer
         numberList.add(5l); //long
 
+        List<String> list1 = Arrays.asList("A", "B", "C");
+        List<String> list2 = Arrays.asList("C", "D", "E");
+
+        getCommonElementsCount(list1, list2);
+
+    }
+
+
+    public static void getCommonElementsCount(List<?> list1, List<?> list2){
+        int count = 0;
+
+        for(Object element: list1){
+            if(list2.contains(element)){
+                count++;
+            }
+            //list2.add(25); you can't add
+        }
+
+        System.out.println("count::::" + count);
+    }
+
+    public static void invalidAggregate(List<?> list1, List<?> list2, List<?> list3){
+        //list3.addAll(list1); //not allowed
+        list3.add(null); //null is okay
     }
 
 
 }
-class Store<T> implements Container<T>{
 
-    private T t;
 
-    @Override
-    public void set(T t) {
-        this.t = t;
-    }
 
-    @Override
-    public T get() {
-        return t;
-    }
-}
-
-interface Container<T> {
-    public void set(T t);
-    public T get();
-}
